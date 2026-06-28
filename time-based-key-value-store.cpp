@@ -1,0 +1,24 @@
+class TimeMap {unordered_map<string, multimap<int, string>> mp;
+private:
+    
+public:
+    TimeMap() {
+    }
+    void set(string key, string value, int timestamp) {
+        mp[key].insert({timestamp, value});
+
+    }
+    string get(string key, int timestamp) {
+       
+        if (mp.find(key) == mp.end()) {
+            return "";
+        }
+        auto it = mp[key].upper_bound(timestamp);
+
+        if (it == mp[key].begin()) {
+            return "";
+        }
+        it--;
+        return it->second;
+    }
+};
